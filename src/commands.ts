@@ -11,6 +11,7 @@ import * as extension from './extension';
 import * as fs from 'fs';
 import { Completion } from './completion';
 import { Note } from './note';
+import { TaskDone } from './task-done';
 
 //
 // Registers all the extension commands
@@ -20,6 +21,10 @@ export function ActivateCommands(context: vscode.ExtensionContext) {
     let toggleCompletion = vscode.commands.registerCommand('extension.toggleCompletion', () => {
         Completion.toggleCompletion();
     });
+    let addDoneDate = vscode.commands.registerCommand('extension.addDoneDate', () => {
+        TaskDone.addDoneDate();
+    });
+    
     let sortByContext = vscode.commands.registerCommand('extension.sortByContext', () => {
         Sorting.sortLinesByField("context");
     });
@@ -85,6 +90,7 @@ export function ActivateCommands(context: vscode.ExtensionContext) {
 
     // add to list of disposables so they will be cleaned up when deactivated
     context.subscriptions.push(toggleCompletion);
+    context.subscriptions.push(addDoneDate);
     context.subscriptions.push(sortByContext);
     context.subscriptions.push(sortByPriority);
     context.subscriptions.push(sortByProject);
