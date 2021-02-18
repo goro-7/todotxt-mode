@@ -2,7 +2,7 @@
     "name": "todotxt-mode",
     "displayName": "todotxt-mode",
     "description": "Commands and decorators for managing todo.txt files",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "publisher": "davraamides",
     "engines": {
         "vscode": "^1.33.0"
@@ -27,10 +27,13 @@
     ],
     "main": "./out/extension.js",
     "contributes": {
-        "commands": [
-            {
+        "commands": [{
                 "command": "extension.toggleCompletion",
                 "title": "todotxt-mode: Toggle Task Completion"
+            },
+            {
+                "command": "extension.addDoneDate",
+                "title": "todotxt-mode: Append done date to task"
             },
             {
                 "command": "extension.sortByContext",
@@ -97,11 +100,16 @@
                 "title": "todotxt-mode: Remove task priorities"
             }
         ],
-        "keybindings": [
-            {
+        "keybindings": [{
                 "command": "extension.toggleCompletion",
                 "key": "ctrl+shift+x",
                 "mac": "ctrl+shift+x",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "extension.addDoneDate",
+                "key": "ctrl+shift+d",
+                "mac": "ctrl+shift+d",
                 "when": "editorTextFocus"
             },
             {
