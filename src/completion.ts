@@ -1,4 +1,6 @@
 import { settings } from 'cluster';
+import { Console } from 'console';
+import { mainModule } from 'process';
 import * as vscode from 'vscode';
 
 import { Helpers } from './helpers';
@@ -34,7 +36,13 @@ export namespace Completion {
                 newTask = lead + (priority || "") + (creationDate || "") + task;
             } else {
                 // toggle to completed by adding in the completed flag and date fields
-                let today = Helpers.getDateTimeParts()[0];
+
+                var dateObj = new Date();
+                var month = dateObj.getUTCMonth() + 1; //months from 1-12
+                var monthString = month < 10 ? "0" + month : month;
+                var day = dateObj.getUTCDate();
+                var dayString = day < 10 ? "0" + day : day;
+                let today = monthString.toString() + dayString.toString();
                 if (Settings.RemovePriorityFromCompletedTasks) {
                     // NOTE if I wanted to preserve the priority like they suggest in the spec,
                     // I could do this, but don't love it
@@ -43,7 +51,8 @@ export namespace Completion {
                     // }
                     priority = "";
                 }
-                newTask = lead + Settings.CompletedTaskPrefix + (priority || "") + today + ' ' + (creationDate || "") + task;
+                let updatedTask = task.replace(/- /g, '');
+                newTask = lead + Settings.CompletedTaskPrefix + (priority || "") + (creationDate || "") + updatedTask + "," + today;
             }
             // replace the old line with the new, toggled line
             editor.edit(builder => {
@@ -51,7 +60,7 @@ export namespace Completion {
                     new vscode.Range(
                         new vscode.Position(i, 0),
                         new vscode.Position(i, text.length)),
-                        newTask);
+                    newTask);
             });
         }
         Helpers.triggerSelectionChange();
