@@ -52,7 +52,8 @@ export namespace Completion {
                     priority = "";
                 }
                 let updatedTask = task.replace(/- /g, '');
-                newTask = lead + Settings.CompletedTaskPrefix + (priority || "") + (creationDate || "") + updatedTask + "," + today;
+                let prefix = updatedTask.match('DD:') ? ',' : ' DD:';
+                newTask = lead + Settings.CompletedTaskPrefix + (priority || "") + (creationDate || "") + updatedTask + prefix + today;
             }
             // replace the old line with the new, toggled line
             editor.edit(builder => {

@@ -31,7 +31,8 @@ export namespace TaskDone {
             var day = dateObj.getUTCDate();
             var dayString = day < 10 ? "0" + day : day;
             let today = monthString.toString() + dayString.toString();
-            newTask = lead + task + "," + today;
+            let prefix = task.match('DD:') ? ',' : ' DD:';
+            newTask = lead + task + prefix + today;
             // replace the old line with the new, toggled line
             editor.edit(builder => {
                 builder.replace(
