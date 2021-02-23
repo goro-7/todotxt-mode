@@ -32,6 +32,10 @@
                 "title": "todotxt-mode: Toggle Task Completion"
             },
             {
+                "command": "extension.nextRevisionToDo",
+                "title": "todotxt-mode: Next Revision ToDo"
+            },
+            {
                 "command": "extension.addDoneDate",
                 "title": "todotxt-mode: Append done date to task"
             },

@@ -12,12 +12,16 @@ import * as fs from 'fs';
 import { Completion } from './completion';
 import { Note } from './note';
 import { TaskDone } from './task-done';
+import { Suggestion } from './suggestion';
 
 //
 // Registers all the extension commands
 //
 export function ActivateCommands(context: vscode.ExtensionContext) {
 
+    let nextRevisionToDo = vscode.commands.registerCommand('extension.nextRevisionToDo', () => {
+        Suggestion.nextRevisionToDo();
+    });
     let toggleCompletion = vscode.commands.registerCommand('extension.toggleCompletion', () => {
         Completion.toggleCompletion();
     });
@@ -91,6 +95,7 @@ export function ActivateCommands(context: vscode.ExtensionContext) {
     // add to list of disposables so they will be cleaned up when deactivated
     context.subscriptions.push(toggleCompletion);
     context.subscriptions.push(addDoneDate);
+    context.subscriptions.push(nextRevisionToDo);
     context.subscriptions.push(sortByContext);
     context.subscriptions.push(sortByPriority);
     context.subscriptions.push(sortByProject);

@@ -56,6 +56,8 @@ export namespace Patterns {
     export const CompletedGlobalRegex = /^\s*x .*$/g;
     export const CompletedRegex = /^\s*x\s/;
 
+    export const DoneDateRegex = "DD:([\d,]*)";
+
     // put them in a map so sorting by any field is consistent
     export const FieldRegex = {
         'context': ContextRegex,
