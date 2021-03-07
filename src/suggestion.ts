@@ -65,11 +65,14 @@ export namespace Suggestion {
             }
         });
         console.info(`Sorted tasks %o`, tasks);
-        const nextTask = tasks[0];
-        console.log(nextTask);
-        vscode.window.showInformationMessage(`Next Task [${nextTask.index + 1}] ${nextTask.line}`);
-        editor.selection = new vscode.Selection(new vscode.Position(nextTask.index, 0), 
-        new vscode.Position(nextTask.index, 0));
+
+        for(var i = 0; i < 5; i++){
+            const nextTask = tasks[0];
+            console.log(nextTask);
+            vscode.window.showInformationMessage(`Next Task [${nextTask.index + 1}] ${nextTask.line}`);
+            editor.selection = new vscode.Selection(new vscode.Position(nextTask.index, 0), 
+            new vscode.Position(nextTask.index, 0));
+        }
     }
 
 }
