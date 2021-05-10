@@ -66,13 +66,16 @@ export namespace Suggestion {
         });
         console.info(`Sorted tasks %o`, tasks);
 
-        for(var i = 0; i < 5; i++){
-            const nextTask = tasks[0];
+        var length = tasks.length <= 5 ? tasks.length : 5;
+        var output = "";
+        for(var i = 0; i < length; i++){
+            const nextTask = tasks[i];
             console.log(nextTask);
-            vscode.window.showInformationMessage(`Next Task [${nextTask.index + 1}] ${nextTask.line}`);
-            editor.selection = new vscode.Selection(new vscode.Position(nextTask.index, 0), 
-            new vscode.Position(nextTask.index, 0));
+            output += `${nextTask.line}\n`;
         }
+        vscode.window.showInformationMessage(output, {"modal" : true});
+        editor.selection = new vscode.Selection(new vscode.Position(tasks[0].index, 0), 
+        new vscode.Position(tasks[0].index, 0));
     }
 
 }
